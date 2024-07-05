@@ -132,7 +132,12 @@ app.use((ctx, next) => {
 	cors();
 	ctx.response.set("Access-Control-Allow-Origin", "*");
 	if (ctx.request.method === 'GET') {
-
+		if(ctx.request.header.info === undefined) {
+			console.log('server has started');
+			ctx.response.body = 'start server';
+			next()
+			return;
+			}
 
 		const id = ctx.request.header.info;
 		const TicketInfo = {};
